@@ -1,0 +1,13 @@
+{
+  "name": "devahoy-nodejs",
+  "version": "0.0.2",
+  "description": "Devahoy Node.js with Express 4 and MongoDB Tutorial",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.8.3",
+    "express": "^4.9.4",
+    "oriento": "latest",
+    "cors": "latest",
+    "base-64": "latest"
+  }
+}

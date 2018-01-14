@@ -1,0 +1,53 @@
+version: '2.3'
+networks:
+  mpp-inject:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/16
+          gateway: 10.1.0.1
+services:
+  client:
+    container_name: mpp-inject-nginx
+    image: 'nginx:alpine'
+    restart: always
+    volumes:
+      - './:/usr/share/nginx/html'
+    ports:
+      - '8000:80'
+    networks:
+      mpp-inject:
+        ipv4_address: 10.1.0.2
+  db:
+    container_name: mpp-inject-orientdb
+    hostname: mpp-inject-orientdb
+    image: broadinstitute/orientdb:2.1.0
+    restart: always
+    ports:
+      - "8002:2424"
+      - "8003:2480"
+    stdin_open: true
+    environment:
+      ORIENTDB_ROOT_PASSWORD: root
+      ORIENTDB_NODE_NAME: odb1
+    tty: true
+    networks:
+      mpp-inject:
+        ipv4_address: 10.1.0.3
+
+  server:
+    container_name: mpp-inject-nodejs
+    image: 'node:8'
+    user: 'node'
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    restart: always
+    ports:
+      - '8001:3000'
+    stdin_open: true
+    tty: true
+    networks:
+      mpp-inject:
+        ipv4_address: 10.1.0.4
