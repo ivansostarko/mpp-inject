@@ -1,6 +1,6 @@
 # MPP - Inject
 ---
-Powerfull XSS Tool
+Powerful XSS Tool for collecting all <forms> data on website.
 
 ![alt text](/assets/mpp-logo.png "Logo")
 
@@ -10,9 +10,6 @@ Powerfull XSS Tool
 
 ## Disclaimer
 I am not responsible for any damage done using this tool. This tool should only be used for educational purposes and for penetration testing.
-
-## Getting Started
-Tu ide opis što zapravo radi sustav i sto im dajem
 
 
 ## What is XSS?
@@ -25,13 +22,13 @@ Cross-site scripting (XSS) is a code injection attack that allows an attacker to
 
 
 ## Key Features
-1. Poukupit sve podatke iz formi i poslat ih na remote server
-2. Kripitranje podataka
-3. Definiranje eventa na koji se dobiavju podaci
-4. Definiranje vrtsa input type
-5. Definiranje vrtsa input name
-6. Zaključavanje dev toolsa
-7. Odabir vremena rada skripte
+1. Collects all data from <form> element on website.
+2. Crypt and decrypt all data.
+3. Defining triggers for collecting data (click, submit...)
+4. Defining input types for collecting data (text, number, password...)
+5. Defining input names for collecting data.
+6. Script doesn't work while browser dev tools are open.
+7. Scheduler.
 
 
 ## Installation & Docker Compose
