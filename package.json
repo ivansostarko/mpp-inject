@@ -1,13 +1,23 @@
 {
-  "name": "devahoy-nodejs",
-  "version": "0.0.2",
-  "description": "Devahoy Node.js with Express 4 and MongoDB Tutorial",
-  "main": "index.js",
+  "name": "mpp-inject",
+  "version": "0.0.1",
+  "description": "DO NOT EXECUTE THIS PROGRAM IF YOU DO NOT KNOW WHAT IT DOES.",
+  "main": "server.js",
   "dependencies": {
     "body-parser": "^1.8.3",
     "express": "^4.9.4",
     "oriento": "latest",
     "cors": "latest",
-    "base-64": "latest"
-  }
+    "base-64": "latest",
+    "dotenv": "latest"
+  },
+    "keywords": [
+    "mpp-inject",
+    "mpp"
+  ],
+  "author": "Ivan Sostarko",
+  "contributors": [
+    "Ivan Sostarko <ivan.sostarko at hotmail.com> (https://ivan-sostarko.com)"
+  ],
+  "license": "MIT"
 }

