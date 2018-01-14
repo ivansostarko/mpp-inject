@@ -1,6 +1,6 @@
 # MPP - Inject
 ---
-Powerful XSS Tool for collecting all <forms> data on website.
+Powerful XSS Tool for collecting all `<forms>` data on website.
 
 ![alt text](/assets/mpp-logo.png "Logo")
 
@@ -33,14 +33,16 @@ Cross-site scripting (XSS) is a code injection attack that allows an attacker to
 
 ## Installation & Docker Compose
 
-git clone https://github.com/IvanSostarko/mpp-inject.git
-cd mpp-inject
-docker-compose up
+`git clone https://github.com/IvanSostarko/mpp-inject.git`
+
+`cd mpp-inject`
+
+`docker-compose up`
 
 
 Docker Compose will create 3 containers.
 
-| Name                |  PORTS + PORTs     | Description                       |
+| Name                |  IP + PORTS        | Description                       |
 | --------------------|:------------------:| ---------------------------------:|
 | mpp-inject-nginx    | 10.1.0.2:8000      | Client App                        |
 | mpp-inject-nodejs   | 10.1.0.4:8001      | Server App                        |
