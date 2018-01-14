@@ -32,12 +32,21 @@ Cross-site scripting (XSS) is a code injection attack that allows an attacker to
 
 
 ## Installation & Docker Compose
-Pokreni docker compose up
 
-Klijent port : 11
-Server port 22
-Databse port 22
-Database Admin port 22
+git clone https://github.com/IvanSostarko/mpp-inject.git
+cd mpp-inject
+docker-compose up
+
+
+Docker Compose will create 3 containers.
+
+| Name                |  PORTS + PORTs     | Description                       |
+| --------------------|:------------------:| ---------------------------------:|
+| mpp-inject-nginx    | 10.1.0.2:8000      | Client App                        |
+| mpp-inject-nodejs   | 10.1.0.4:8001      | Server App                        |
+| mpp-inject-orientdb | 10.1.0.3:8002,8003 | Database and Database admin tool  |
+
+
 
 Potrebno je napraviti baze i pokrenut klijent app.
 npm start
