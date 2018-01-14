@@ -49,32 +49,13 @@ Docker Compose will create 3 containers.
 | mpp-inject-orientdb | 10.1.0.3:8002,8003 | Database and Database admin tool  |
 
 
+## Start server
 
-Potrebno je napraviti baze i pokrenut klijent app.
-npm start
+'docker exec -i -t mpp-inject-nodejs /bin/bash '
 
+'npm install'
 
-# Example Use
-
-Skripta se može uključiti na 3 načina
-1. Clijent.js
-2. Client.min,js
-3. Inject code
-
-Unutar Klijentse aplikacije potrebno je definirati:
-
-## Debug Mode
-Debug Mod se može uključiti na klikjent i server app.
-
-### Client app
-slika
-### Server app
-slika
-
-## Database Admin
-sdasdasdasdasdasdsa
-
-## Bug Reporting
+'node server.js'
 
 ## Contributing
 
