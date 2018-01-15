@@ -57,24 +57,10 @@ Docker Compose will create 3 containers.
 
 `node server.js`
 
-# Example Use
-
-Skripta se može uključiti na 3 načina
-1. Clijent.js
-2. Client.min,js
-3. Inject code
-
-Unutar Klijentse aplikacije potrebno je definirati:
-
-## Debug Mode
-Debug Mod se može uključiti na klikjent i server app.
-
-### Client app
-slika
-### Server app
-slika
-
 ## Database Admin
+
+Access to GUI: 10.1.0.3:8003
+
 [![alt text](/assets/db_admin.png)](https://raw.githubusercontent.com/IvanSostarko/mpp-inject/master/assets/db_admin.png)
 
 ## Contributing
@@ -87,6 +73,11 @@ slika
 
 
 ## To do
+1. Define input types
+2. Define input names
+3. Defining triggers for collecting data (click, submit...)
+4. Lock Dev Tools.
+7. Scheduler.
 
 ## License (MIT)
 
