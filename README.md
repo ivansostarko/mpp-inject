@@ -75,8 +75,7 @@ slika
 slika
 
 ## Database Admin
-![alt text](/assets/db_admin.png "Logo")
-
+[![alt text](/assets/db_admin.png)](https://raw.githubusercontent.com/IvanSostarko/mpp-inject/master/assets/db_admin.png)
 
 ## Contributing
 
