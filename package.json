@@ -4,7 +4,7 @@
   "description": "DO NOT EXECUTE THIS PROGRAM IF YOU DO NOT KNOW WHAT IT DOES.",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.8.3",
+    "body-parser": "^1.19.0",
     "express": "^4.9.4",
     "oriento": "latest",
     "cors": "latest",
