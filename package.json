@@ -9,9 +9,10 @@
     "oriento": "latest",
     "cors": "latest",
     "base-64": "latest",
-    "dotenv": "latest"
+    "dotenv": "latest",
+    "snyk": "^1.88.0"
   },
-    "keywords": [
+  "keywords": [
     "mpp-inject",
     "mpp"
   ],
@@ -19,5 +20,10 @@
   "contributors": [
     "Ivan Sostarko <ivan.sostarko at hotmail.com> (https://ivan-sostarko.com)"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }

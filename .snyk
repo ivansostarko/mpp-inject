@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:mime:20170907':
+    - oriento > request > mime:
+        patched: '2018-06-29T23:17:02.132Z'
+    - oriento > request > form-data > mime:
+        patched: '2018-06-29T23:17:02.132Z'
