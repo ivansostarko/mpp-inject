@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.8.3",
-    "express": "^4.9.4",
+    "express": "^4.16.3",
     "oriento": "latest",
     "cors": "latest",
     "base-64": "latest",
